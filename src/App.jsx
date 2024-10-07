@@ -26,7 +26,7 @@ function App() {
         const countries = await getAllCountries();
         dispatch(setAllCountries(countries));
         dispatch(setDisplayedCountries(countries));
-        dispatch(sortCountries("name"));
+        dispatch(sortCountries("population"));
         // dispatch(changeFilter({ Oceania: true, independent: true }));
       } catch (error) {
         console.log(error.message);

@@ -10,15 +10,16 @@ const countriesSlice = createSlice({
     //Sort: name, population(default) or area
     sort: "population",
     //Filters:
-    filter: {
-      //region
+
+    regionFilter: {
       Africa: false,
       Americas: false,
       Asia: false,
       Europe: false,
       Oceania: false,
       Antarctic: false,
-      //misc
+    },
+    miscFilter: {
       unMember: false,
       independent: false,
     },
@@ -35,6 +36,7 @@ const countriesSlice = createSlice({
 
     sortCountries(state, action) {
       const { payload } = action;
+      state.sort = payload;
       if (payload === "population") {
         state.displayedCountries.sort((a, b) => b.population - a.population);
       }
@@ -61,18 +63,41 @@ const countriesSlice = createSlice({
     },
 
     changeFilter(state, action) {
-      const { payload } = action;
-      state.filter = { ...state.filter, ...payload };
-      state.displayedCountries = state.allCountries;
-      for (const property in state.filter) {
-        if (state.filter[property])
+      //action: { filterby: "region/misc", changes:{changedState:boolean} }
+
+      const { filterBy, changes } = action.payload;
+
+      if (filterBy === "region")
+        state.regionFilter = { ...state.regionFilter, ...changes };
+      if (filterBy === "misc")
+        state.miscFilter = { ...state.miscFilter, ...changes };
+
+      //The region filtering is additive, the other ones are substractive.
+
+      //region: if no filter is selected show all, else show only selected ones
+      if (Object.values(state.regionFilter).every((item) => item === false)) {
+        state.displayedCountries = state.allCountries;
+      } else {
+        state.displayedCountries = [];
+        for (const property in state.regionFilter) {
+          if (state.regionFilter[property]) {
+            const addedCountries = state.allCountries.filter(
+              (country) => country.region === property
+            );
+            state.displayedCountries = [
+              ...state.displayedCountries,
+              ...addedCountries,
+            ];
+          }
+        }
+      }
+
+      //misc filtering
+
+      for (const property in state.miscFilter) {
+        if (state.miscFilter[property])
           state.displayedCountries = state.displayedCountries.filter(
-            (element) => {
-              if (regions.includes(property)) {
-                return element.region === property;
-              }
-              return element[property];
-            }
+            (element) => element[property]
           );
       }
     },

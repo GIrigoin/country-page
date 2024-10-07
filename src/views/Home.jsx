@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <img src={logoImg} alt="World Ranks" />
-      <div className="flex flex-row">
+      <div className="flex flex-col lg:flex-row">
         <Filter />
         <CountryCards />
       </div>
