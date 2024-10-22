@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import CountryRow from "./CountryRow";
+import SearchBar from "./SearchBar";
 
 const CountryCards = () => {
   const countries = useSelector((state) => state.countries.displayedCountries);
   return (
     <div>
-      <div>searchbar</div>
+      <SearchBar />
       <section>
         <table>
           <colgroup>

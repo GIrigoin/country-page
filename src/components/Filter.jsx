@@ -5,10 +5,9 @@ import { regions } from "../utils/constants";
 const Filter = () => {
   const countries = useSelector((state) => state.countries.displayedCountries);
   const sort = useSelector((state) => state.countries.sort);
-  const regionFilter = useSelector((state) => state.countries.regionFilter);
   const dispatch = useDispatch();
 
-  const handleChange = (event) => {
+  const handleSortChange = (event) => {
     dispatch(sortCountries(event.target.value));
   };
 
@@ -22,8 +21,20 @@ const Filter = () => {
 
     dispatch(sortCountries(sort));
   };
+
+  const handleStatusChange = (event) => {
+    dispatch(
+      changeFilter({
+        filterBy: "misc",
+        changes: { [event.target.value]: event.target.checked },
+      })
+    );
+
+    dispatch(sortCountries(sort));
+  };
+
   return (
-    <div>
+    <search>
       {countries.length >= 0 ? (
         <p>{`Found ${countries.length} countries`}</p>
       ) : (
@@ -31,7 +42,7 @@ const Filter = () => {
       )}
       <section>
         <p>Sort by</p>
-        <select name="order" id="" value={sort} onChange={handleChange}>
+        <select name="order" id="" value={sort} onChange={handleSortChange}>
           <option value="population">Population</option>
           <option value="name">Name</option>
           <option value="area">Area</option>
@@ -41,7 +52,7 @@ const Filter = () => {
         <p>Region</p>
 
         {regions.map((region) => (
-          <label htmlFor={region}>
+          <label key={region} htmlFor={region}>
             <input
               type="checkbox"
               name="regions"
@@ -53,7 +64,30 @@ const Filter = () => {
           </label>
         ))}
       </section>
-    </div>
+      <section>
+        <p>Status</p>
+        <label htmlFor="unMember">
+          <input
+            type="checkbox"
+            name="status"
+            id="unMember"
+            value="unMember"
+            onChange={handleStatusChange}
+          />
+          <span>Member of the United Nations</span>
+        </label>
+        <label htmlFor="independent">
+          <input
+            type="checkbox"
+            name="status"
+            id="independent"
+            value="independent"
+            onChange={handleStatusChange}
+          />
+          <span>Independent</span>
+        </label>
+      </section>
+    </search>
   );
 };
 
