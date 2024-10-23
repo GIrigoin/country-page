@@ -32,7 +32,7 @@ export const getCountriesByName = async (searchText) => {
     if (data) return data;
     else return [];
   } catch (error) {
-    console.log(error.message);
+    throw Error(error.message);
   }
 };
 
@@ -71,3 +71,27 @@ export const getCountriesBySubRegion = async (subRegion) => {
 //* 5. Country details by name
 // Fields to fetch for Detail:
 // name(common,official), population, area, capital, subregion, languages(obj=> array or string of values), currencies(obj), continents(array), borders(array of cca3)
+export const getCountryDetails = async (country) => {
+  const URL = `https://restcountries.com/v3.1/name/${country}?fullText=true`;
+  try {
+    const { data } = await axios(
+      `${URL}&fields=name,subregion,area,population,flags,capital,languages,currencies,continents,borders`
+    );
+
+    if (data) return data;
+    else return [];
+  } catch (error) {
+    throw Error(error.message);
+  }
+};
+
+export const getBorderInfo = async (border) => {
+  const URL = "https://restcountries.com/v3.1/alpha/";
+
+  try {
+    const { data } = await axios(`${URL}${border}?fields=name,flags`);
+
+    if (data) return data[0];
+    else return [];
+  } catch (error) {}
+};
