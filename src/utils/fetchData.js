@@ -85,13 +85,16 @@ export const getCountryDetails = async (country) => {
   }
 };
 
-export const getBorderInfo = async (border) => {
+export const getBorderInfo = async (borders) => {
   const URL = "https://restcountries.com/v3.1/alpha/";
-
-  try {
-    const { data } = await axios(`${URL}${border}?fields=name,flags`);
-
-    if (data) return data[0];
-    else return [];
-  } catch (error) {}
+  const result = [];
+  for (const border of borders) {
+    try {
+      const { data } = await axios(`${URL}${border}?fields=name,flags`);
+      if (data.name) result.push(data);
+    } catch (error) {
+      throw Error(error.message);
+    }
+  }
+  return result;
 };

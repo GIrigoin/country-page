@@ -13,6 +13,7 @@ import {
   changeFilter,
 } from "./redux/countriesSlice";
 import { getAllCountries } from "./utils/fetchData";
+import logoImg from "./assets/Logo.svg";
 import Home from "./views/Home";
 import Detail from "./views/Detail";
 import { useEffect } from "react";
@@ -34,12 +35,13 @@ function App() {
     })();
   }, []);
   return (
-    <>
+    <div className="bg-app-bg bg-[length:1280px_300px]  bg-no-repeat bg-top bg-background min-h-screen flex flex-col items-center py-20">
+      <img src={logoImg} alt="World Ranks" />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detail/:country" element={<Detail />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
