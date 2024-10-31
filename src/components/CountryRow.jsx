@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const CountryRow = ({ flags, name, area, region, population }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/detail/${name.common}`);
+    navigate(`/country-page/detail/${name.common}`);
   };
 
   return (

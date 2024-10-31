@@ -38,8 +38,8 @@ function App() {
     <div className=" bg-app-bg bg-[length:1280px_300px]  bg-no-repeat bg-top bg-background min-h-screen flex flex-col items-center py-20 overflow-x-hidden">
       <img className="mt-10 mb-24" src={logoImg} alt="World Ranks" />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/detail/:country" element={<Detail />} />
+        <Route path="/country-page/" element={<Home />} />
+        <Route path="/country-page/detail/:country" element={<Detail />} />
       </Routes>
     </div>
   );
