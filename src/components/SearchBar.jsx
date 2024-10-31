@@ -78,7 +78,9 @@ const SearchBar = () => {
           }}
         />
         <section className="absolute invisible p-2 bg-input-bg text-main-text text-body peer-focus/input:visible">
-          <p className="text-secondary-text text-title">Regions</p>
+          <p className="text-secondary-text text-title py-1 border-b border-t-secondary-text mb-2">
+            Regions
+          </p>
           {regions.map((region) => (
             <p
               onMouseDown={async () => await handleRegionClick(region)}
@@ -89,7 +91,9 @@ const SearchBar = () => {
             </p>
           ))}
 
-          <p className="text-secondary-text text-title">Subregions</p>
+          <p className="text-secondary-text text-title py-1 border-b border-t-secondary-text mb-2">
+            Subregions
+          </p>
           {subRegions.map((subRegion) => (
             <p
               onMouseDown={async () => await handleSubRegionClick(subRegion)}
