@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { sortCountries, changeFilter } from "../redux/countriesSlice";
 import { regions } from "../utils/constants";
+import arrowIcon from "../assets/Expand_down.svg";
 
 const Filter = () => {
-  const countries = useSelector((state) => state.countries.displayedCountries);
   const sort = useSelector((state) => state.countries.sort);
   const dispatch = useDispatch();
 
@@ -34,22 +34,35 @@ const Filter = () => {
   };
 
   return (
-    <search>
-      {countries.length >= 0 ? (
+    <search className="flex-1 pr-8">
+      {/* {countries.length >= 0 ? (
         <p>{`Found ${countries.length} countries`}</p>
       ) : (
         <p>Searching...</p>
-      )}
-      <section>
-        <p>Sort by</p>
-        <select name="order" id="" value={sort} onChange={handleSortChange}>
-          <option value="population">Population</option>
-          <option value="name">Name</option>
-          <option value="area">Area</option>
-        </select>
+      )} */}
+      <section className="mb-7">
+        <p className="text-small text-secondary-text font-medium mb-3">
+          Sort by
+        </p>
+        <div className="relative">
+          <img className="absolute right-0 p-2 pt-3" src={arrowIcon} alt="" />
+          <select
+            className="w-full appearance-none bg-background rounded-md text-main-text p-2 text-body border border-input-bg "
+            name="order"
+            id=""
+            value={sort}
+            onChange={handleSortChange}
+          >
+            <option value="population">Population</option>
+            <option value="name">Name</option>
+            <option value="area">Area</option>
+          </select>
+        </div>
       </section>
-      <section>
-        <p>Region</p>
+      <section className="mb-7">
+        <p className="text-small text-secondary-text font-medium mb-3">
+          Region
+        </p>
 
         {regions.map((region) => (
           <label key={region} htmlFor={region}>
@@ -64,8 +77,10 @@ const Filter = () => {
           </label>
         ))}
       </section>
-      <section>
-        <p>Status</p>
+      <section className="mb-7">
+        <p className="text-small text-secondary-text font-medium mb-3">
+          Status
+        </p>
         <label htmlFor="unMember">
           <input
             type="checkbox"

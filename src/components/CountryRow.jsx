@@ -7,14 +7,21 @@ const CountryRow = ({ flags, name, area, region, population }) => {
   };
 
   return (
-    <tr className="hover:cursor-pointer" onClick={handleClick}>
+    <tr
+      className="hover:cursor-pointer text-main-text text-title font-medium hover:bg-secondary-text active:bg-main-text"
+      onClick={handleClick}
+    >
       <td>
-        <img className="w-[50px] rounded" src={flags.svg} alt={flags.alt} />
+        <img
+          className="w-[50px] rounded py-2 mr-10"
+          src={flags.svg}
+          alt={flags.alt}
+        />
       </td>
-      <td>{name.common}</td>
-      <td>{population}</td>
-      <td>{area}</td>
-      <td>{region}</td>
+      <td className="mr-2">{name.common}</td>
+      <td className="mr-2">{population}</td>
+      <td className="mr-2">{area}</td>
+      <td className="mr-2">{region}</td>
     </tr>
   );
 };

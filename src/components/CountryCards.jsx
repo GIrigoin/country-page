@@ -1,21 +1,19 @@
 import { useSelector } from "react-redux";
 import CountryRow from "./CountryRow";
-import SearchBar from "./SearchBar";
 
 const CountryCards = () => {
   const countries = useSelector((state) => state.countries.displayedCountries);
   return (
-    <div>
-      <SearchBar />
+    <div className="flex-3">
       <section>
-        <table>
+        <table className="w-full">
           <colgroup>
             <col span={4} />
             <col span={1} className="collapse lg:visible" />
           </colgroup>
           <thead>
-            <tr>
-              <th>Flag</th>
+            <tr className="text-small text-secondary-text border-b border-input-bg text-left">
+              <th className="py-5">Flag</th>
               <th>Name</th>
               <th>Population</th>
               <th>{"Area (km²)"}</th>
