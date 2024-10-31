@@ -123,7 +123,7 @@ const Detail = () => {
             <p className="py-6 text-secondary-text font-medium text-body">
               Neighbouring Countries
             </p>
-            <div className="flex justify-start gap-4">
+            <div className="flex justify-start gap-4 flex-wrap">
               {country.borders.map((border) => (
                 <div>
                   <img
